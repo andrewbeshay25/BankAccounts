@@ -1,13 +1,15 @@
-public class CheckingAccount {
-    private double balance;
+class CheckingAccount {
+    private double balance = 50;
 
-    public CheckingAccount() {
-        this.balance = 50;
-    }
-    public double getBalance() {
-        return balance;
-    }
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public double getBalance() { return balance; }
+
+    public void deposit(double amount) { balance += amount; }
+
+    public boolean withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
     }
 }
