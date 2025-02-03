@@ -1,43 +1,33 @@
-import java.util.Random;
+class Bank {
+    private final String name;
+    private final int accountNumber;
+    private double checkingBalance = 50;
+    private double savingsBalance = 0;
 
-
-public class Bank {
-    Random rand = new Random();
-
-    String[] accountInfo;
-    String name;
-    int accountNumber;
-
-    public Bank(String name) {
-        accountInfo = new String[10];
+    public Bank(String name, int accountNumber) {
         this.name = name;
-        accountNumber = rand.nextInt(9999 - 1000 + 1) + 1000;
-
-
+        this.accountNumber = accountNumber;
     }
 
-    public void displayMenu(){
-        System.out.println("""
-                1.  Create an account
-                
-                2.  Deposit into Checking Account
-                
-                3.  Deposit into Savings Account
-                
-                4.  Withdrawal from Checking Account
-                
-                5.  Withdrawal from Savings Account
-                
-                6.  Print out Bank Statement
-                
-                0.  Quit""");
+    public String getName() { return name; }
+    public int getAccountNumber() { return accountNumber; }
+
+    public void depositChecking(double amount) { checkingBalance += amount; }
+    public void withdrawChecking(double amount) {
+        if (amount <= checkingBalance) checkingBalance -= amount;
+        else System.out.println("Insufficient funds.");
     }
 
-    public void displayBankStatement(){}
+    public void depositSavings(double amount) { savingsBalance += amount; }
+    public void withdrawSavings(double amount) {
+        if (amount <= savingsBalance) savingsBalance -= amount;
+        else System.out.println("Insufficient funds.");
+    }
 
-    public void depositChecking(int amount){}
-    public void withdrawChecking(int amount){}
-
-    public void depositSavings(int amount){}
-    public void withdrawSavings(int amount){}
+    public void displayBankStatement() {
+        System.out.println("\nName: " + name);
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Checking Balance: $" + checkingBalance);
+        System.out.println("Savings Balance: $" + savingsBalance);
+    }
 }
